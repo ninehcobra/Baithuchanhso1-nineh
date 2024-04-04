@@ -11,6 +11,7 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Xml.Linq;
+using Bunifu.UI.WinForms.Extensions;
 
 namespace Baithuchanhso1
 {
@@ -19,7 +20,7 @@ namespace Baithuchanhso1
     public partial class ChatForm : Form
     {
         string PlaceholderText = "Type a message here";
-        string PlaceholderTextVN = "Nhập tin nhắn ở đây";
+     
         string userLoggedIn;
         string userChattingWith;
         string language = "EN";
@@ -27,17 +28,103 @@ namespace Baithuchanhso1
         {
             InitializeComponent();
             LoadUserData(currentUsername);
-            txtChat.Text = language=="EN"? PlaceholderText:PlaceholderTextVN;
+
+
+            txtChat.Text = PlaceholderText;
             txtChat.ForeColor = SystemColors.GrayText;
             LoadUsers(currentUsername);
             userLoggedIn = currentUsername;
             this.KeyPress += new KeyPressEventHandler(Form_KeyPress);
             Focus();
             pnlChat.Controls.SetChildIndex(chatContent, 0);
+            (language, appTheme) = LoadConfig();
+            LoadThemeAndLanguage();
 
 
-        
 
+
+        }
+
+        public void LoadThemeAndLanguage()
+        {
+            btnEN.Visible=language=="EN"?true:false;
+            btnVN.Visible = language == "VN" ? true : false;
+            btnLight.Visible=appTheme=="light"?true : false;
+            btnNight.Visible = appTheme == "dark" ? true : false;
+
+            panel6.BackColor = appTheme=="light"? System.Drawing.ColorTranslator.FromHtml("#8388C9") : System.Drawing.ColorTranslator.FromHtml("#7C7736");
+            label2.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            panel2.BackColor = appTheme == "light" ? System.Drawing.ColorTranslator.FromHtml("#00AFF0") : System.Drawing.ColorTranslator.FromHtml("#FF50F0");
+            panel7.BackColor = appTheme == "light" ? System.Drawing.ColorTranslator.FromHtml("#00AFF0") : System.Drawing.ColorTranslator.FromHtml("#FF50F0");
+            lblName.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label1.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            chatContent.BackColor=appTheme=="light" ?SystemColors.Window : System.Drawing.ColorTranslator.FromHtml("#212121");
+            flowLayoutPanel1.BackColor=appTheme == "light" ? System.Drawing.ColorTranslator.FromHtml("#F6FCFB") : System.Drawing.ColorTranslator.FromHtml("#171717");
+            panel3.BackColor = appTheme == "light" ? System.Drawing.ColorTranslator.FromHtml("#F6FCFB") : System.Drawing.ColorTranslator.FromHtml("#171717");
+            picWelcome.BackColor = appTheme == "light" ? SystemColors.Window : System.Drawing.ColorTranslator.FromHtml("#212121");
+            pnlChat.BackColor = appTheme == "light" ? SystemColors.Window : System.Drawing.ColorTranslator.FromHtml("#212121");
+            this.BackColor = appTheme == "light" ? SystemColors.Window : System.Drawing.ColorTranslator.FromHtml("#212121");
+            lblWelcome.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            PlaceholderText = language == "EN" ? "Type a message here" : "Nhập tin nhắn ở đây";
+            txtChat.Text = PlaceholderText;
+            lblReceiver.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label3.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label1.Text = language == "EN" ? "Online" : "Trực tuyến";
+            label3.Text = language == "EN" ? "Online" : "Trực tuyến";
+            lblWelcome.Text = language == "EN" ? "Choose friend to start conversation" : "Chọn bạn để bắt đầu trò chuyện";
+
+            LoadUsers(userLoggedIn);
+            foreach (FriendListItem item in flowLayoutPanel1.Controls)
+            {
+
+
+                if (appTheme == "dark")
+                {
+                    item.ForeColor = Color.White;
+                    item.BackColor = System.Drawing.ColorTranslator.FromHtml("#171717");
+                }
+                else
+                {
+
+                    item.ForeColor=SystemColors.ControlText;
+                    item.BackColor = System.Drawing.ColorTranslator.FromHtml("#F6FCFB");
+                }
+
+            }
+        }
+
+        public static (string, string) LoadConfig()
+        {
+            const string FilePath = "config.txt";
+            // Kiểm tra xem file tồn tại không
+            if (File.Exists(FilePath))
+            {
+                // Đọc dữ liệu từ file
+                string data = File.ReadAllText(FilePath);
+
+                // Tách dữ liệu thành language và theme
+                string[] parts = data.Split(',');
+                if (parts.Length == 2)
+                {
+                    return (parts[0], parts[1]);
+                }
+            }
+         
+                SaveConfig("EN", "light");
+                return ("EN", "light");
+            
+
+            // Trả về giá trị mặc định nếu file không tồn tại hoặc dữ liệu không hợp lệ
+          
+        }
+        public static void SaveConfig(string language, string theme)
+        {
+               const string FilePath = "config.txt";
+         // Tạo nội dung cần ghi vào file
+         string data = $"{language},{theme}";
+
+            // Ghi dữ liệu vào file
+            File.WriteAllText(FilePath, data);
         }
         private void Form_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -49,7 +136,7 @@ namespace Baithuchanhso1
                 string message = txtChat.Text.Trim();
 
                 // Kiểm tra xem tin nhắn có trống không
-                if (!string.IsNullOrWhiteSpace(message) && message != PlaceholderText&&message!=PlaceholderTextVN)
+                if (!string.IsNullOrWhiteSpace(message) && message != PlaceholderText)
                 {
                     // Tạo tên tập tin là "message.txt"
                     string filePath = "message.txt";
@@ -161,8 +248,9 @@ namespace Baithuchanhso1
 
             // Hiển thị thông tin của người dùng và thay đổi màu sắc của FriendListItem được chọn
             clickedItem.BackColor = System.Drawing.ColorTranslator.FromHtml("#C7ECFC");
+            clickedItem.ForeColor=SystemColors.ControlText;
 
-            txtChat.Text = language=="EN"?PlaceholderText:PlaceholderTextVN;
+            txtChat.Text = PlaceholderText;
             txtChat.ForeColor = SystemColors.GrayText;
 
             // Đặt lại màu sắc của các FriendListItem khác
@@ -170,17 +258,22 @@ namespace Baithuchanhso1
             {
                 if (item != clickedItem)
                 {
+                
                     if (appTheme == "dark")
                     {
+                        
                         item.BackColor = System.Drawing.ColorTranslator.FromHtml("#171717");
+                        item.ForeColor = Color.White;
                     }
                     else
                     {
                         item.BackColor = System.Drawing.ColorTranslator.FromHtml("#F4FCFE");
+                        item.ForeColor = SystemColors.ControlText;
                     }
                 }
             }
 
+            btnDone.Visible = false;
             List<(string, string, string, string,string)> messages = LoadMessages(userLoggedIn, username);
             DisplayMessages(messages);
         }
@@ -263,12 +356,10 @@ namespace Baithuchanhso1
             }    
         }
 
-        // Phương thức kiểm tra xem tin nhắn có chứa đường dẫn đến ảnh hoặc video không
+     
         private bool IsImageOrVideoMessage(string message)
         {
-            // Thực hiện kiểm tra ở đây, ví dụ kiểm tra phần mở rộng của đường dẫn
-            // Trong trường hợp này, giả sử message là đường dẫn đến tệp ảnh hoặc video
-            // Bạn có thể thay đổi điều kiện kiểm tra tùy thuộc vào cách bạn lưu trữ tin nhắn
+         
             if (message.EndsWith(".jpg") || message.EndsWith(".png") || message.EndsWith(".gif") ||
                 message.EndsWith(".mp4") || message.EndsWith(".avi") || message.EndsWith(".mov"))
             {
@@ -337,7 +428,7 @@ namespace Baithuchanhso1
 
         private void txtChat_Enter(object sender, EventArgs e)
         {
-            if(txtChat.Text ==PlaceholderText||txtChat.Text==PlaceholderTextVN)
+            if(txtChat.Text ==PlaceholderText)
             {
                 txtChat.Text = "";
                 txtChat.Focus();
@@ -349,7 +440,7 @@ namespace Baithuchanhso1
         {
             if (string.IsNullOrWhiteSpace(txtChat.Text))
             {
-                txtChat.Text = language == "EN" ? PlaceholderText : PlaceholderTextVN;
+                txtChat.Text = PlaceholderText;
                 txtChat.ForeColor = SystemColors.GrayText;
             }
         }
@@ -370,7 +461,7 @@ namespace Baithuchanhso1
             string message = txtChat.Text.Trim();
 
             // Kiểm tra xem tin nhắn có trống không
-            if (!string.IsNullOrWhiteSpace(message) && message != PlaceholderText&&message!=PlaceholderTextVN)
+            if (!string.IsNullOrWhiteSpace(message) && message != PlaceholderText)
             {
                 // Tạo tên tập tin là "message.txt"
                 string filePath = "message.txt";
@@ -399,7 +490,7 @@ namespace Baithuchanhso1
 
         private void AddEmotion(string emotion)
         {
-            if(txtChat.Text==PlaceholderText||txtChat.Text==PlaceholderTextVN)
+            if(txtChat.Text==PlaceholderText)
             {
                 txtChat.Text = "";
             }    
@@ -455,6 +546,46 @@ namespace Baithuchanhso1
             return userMessages;
         }
 
+        private List<string> LoadMediaFiles(string currentUser, string targetUser)
+        {
+            string filePath = "message.txt";
+            List<string> mediaFiles = new List<string>();
+
+            if (File.Exists(filePath))
+            {
+                // Đọc từng dòng trong tập tin
+                string[] lines = File.ReadAllLines(filePath);
+                foreach (string line in lines)
+                {
+                    // Tách thông tin người gửi, tin nhắn và đường dẫn phương tiện
+                    string[] parts = line.Split(new string[] { "||" }, StringSplitOptions.None);
+                    if (parts.Length == 4)
+                    {
+                        string sender = parts[1];
+                        string receiver = parts[2];
+                        string message = parts[3];
+
+                        // Kiểm tra nếu người gửi và người nhận đúng và tin nhắn chứa đường dẫn video
+                        if ((sender == currentUser && receiver == targetUser) || (sender == targetUser && receiver == currentUser))
+                        {
+                            // Kiểm tra nếu tin nhắn là đường dẫn video
+                            if (IsVideo(message))
+                            {
+                                mediaFiles.Add(message);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return mediaFiles;
+        }
+
+        private bool IsVideo(string path)
+        {
+            string extension = Path.GetExtension(path).ToLower();
+            return extension == ".mp4" || extension == ".avi" || extension == ".wmv" || extension == ".mov" || extension == ".mkv"|| extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif" || extension == ".bmp";
+        }
 
         private void pictureBox8_Click(object sender, EventArgs e)
         {
@@ -554,11 +685,7 @@ namespace Baithuchanhso1
                         if (fileType == ".mp4" || fileType == ".avi" || fileType == ".mov")
                         {
                             // Kiểm tra nếu đã chọn video trước đó
-                            if (hasVideo)
-                            {
-                                MessageBox.Show("Chỉ có thể gửi một video.");
-                                return;
-                            }
+                          
 
                             // Đánh dấu đã chọn video
                             hasVideo = true;
@@ -699,19 +826,14 @@ namespace Baithuchanhso1
           //  whiteToolStripMenuItem.Text = "Light";
             language = "EN";
             LoadUsers(userLoggedIn);
-            if (txtChat.Text == PlaceholderTextVN)
-            {
-                txtChat.Text = PlaceholderText;
-            }
+           
         }
 
         private void vietnameseToolStripMenuItem_Click(object sender, EventArgs e)
         {
            // userToolStripMenuItem.Text = "Người dùng";
           //  profileToolStripMenuItem.Text = "Thông tin cá nhân";
-            label1.Text = "Trực tuyến";
-            lblWelcome.Text = "Chọn bạn để bắt đầu cuộc trò chuyện";
-            label3.Text = "Trực tuyến";
+           
            // settingToolStripMenuItem.Text = "Cài đặt";
             //languageToolStripMenuItem.Text = "Ngôn ngữ";
             //englishToolStripMenuItem.Text = "Tiếng Anh";
@@ -721,15 +843,29 @@ namespace Baithuchanhso1
             //whiteToolStripMenuItem.Text = "Sáng";
             language = "VN";
             LoadUsers(userLoggedIn);
-            if(txtChat.Text==PlaceholderText)
-            {
-                txtChat.Text = PlaceholderTextVN;
-            }    
+              
         }
 
         private void ChatForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+      
+        private void ResetMessageColors()
+        {
+            foreach (Control control in chatContent.Controls)
+            {
+                if (control is MessageSentControl messageControl)
+                {
+                    messageControl.ChangeLabelColor(Color.Black);
+                }
+                else if (control is MessageReceiveControl messageReceiveControl)
+                {
+                    messageReceiveControl.ChangeLabelColor(Color.Black);
+                }
+            }
+            btnDone.Visible = false;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -739,61 +875,145 @@ namespace Baithuchanhso1
             // Biến để kiểm tra xem có tìm thấy tin nhắn nào không
             bool found = false;
 
-            // Duyệt qua tất cả các tin nhắn để tìm kiếm
-            foreach (Control control in chatContent.Controls)
+            if (searchText !="")
             {
-                if (control is MessageSentControl messageControl)
+                // Duyệt qua tất cả các tin nhắn để tìm kiếm
+                foreach (Control control in chatContent.Controls)
                 {
-                    // Kiểm tra xem tin nhắn có chứa nội dung tìm kiếm không
-                    if (messageControl.Message.ToLower().Contains(searchText))
+                    if (control is MessageSentControl messageControl)
                     {
-                        // Tô đỏ tin nhắn
-                        messageControl.BackColor = Color.Red;
+                        // Kiểm tra xem tin nhắn có chứa nội dung tìm kiếm không
+                        if (messageControl.Message.ToLower().Contains(searchText))
+                        {
+                            // Tô đỏ tin nhắn
+                            messageControl.ChangeLabelColor(Color.Red);
 
-                        // Di chuyển đến vị trí của tin nhắn tìm thấy
-                        chatContent.ScrollControlIntoView(messageControl);
+                            // Di chuyển đến vị trí của tin nhắn tìm thấy
+                            chatContent.ScrollControlIntoView(messageControl);
 
-                        // Đánh dấu rằng đã tìm thấy ít nhất một tin nhắn
-                        found = true;
+                            // Đánh dấu rằng đã tìm thấy ít nhất một tin nhắn
+                            found = true;
+                            btnDone.Visible = true;
+                        }
+                        else
+                        {
+                            // Nếu không tìm thấy, thì khôi phục màu nền gốc
+                            messageControl.BackColor = Color.Transparent;
+                        }
                     }
-                    else
+                    else if (control is MessageReceiveControl messageReceiveControl)
                     {
-                        // Nếu không tìm thấy, thì khôi phục màu nền gốc
-                        messageControl.BackColor = Color.Transparent;
+                        // Kiểm tra xem tin nhắn nhận có chứa nội dung tìm kiếm không
+                        if (messageReceiveControl.Message.ToLower().Contains(searchText))
+                        {
+                            // Tô đỏ tin nhắn
+                            messageReceiveControl.ChangeLabelColor(Color.Red);
+
+                            // Di chuyển đến vị trí của tin nhắn tìm thấy
+                            chatContent.ScrollControlIntoView(messageReceiveControl);
+
+                            // Đánh dấu rằng đã tìm thấy ít nhất một tin nhắn
+                            found = true;
+                            btnDone.Visible = true;
+                        }
+                        else
+                        {
+                            // Nếu không tìm thấy, thì khôi phục màu nền gốc
+                            messageReceiveControl.BackColor = Color.Transparent;
+                        }
                     }
                 }
-                else if (control is MessageReceiveControl messageReceiveControl)
+
+                // Kiểm tra xem có tin nhắn nào được tìm thấy hay không
+                if (!found)
                 {
-                    // Kiểm tra xem tin nhắn nhận có chứa nội dung tìm kiếm không
-                    if (messageReceiveControl.Message.ToLower().Contains(searchText))
-                    {
-                        // Tô đỏ tin nhắn
-                        messageReceiveControl.BackColor = Color.Red;
-
-                        // Di chuyển đến vị trí của tin nhắn tìm thấy
-                        chatContent.ScrollControlIntoView(messageReceiveControl);
-
-                        // Đánh dấu rằng đã tìm thấy ít nhất một tin nhắn
-                        found = true;
-                    }
-                    else
-                    {
-                        // Nếu không tìm thấy, thì khôi phục màu nền gốc
-                        messageReceiveControl.BackColor = Color.Transparent;
-                    }
+                    MessageBox.Show("Không tìm thấy tin nhắn nào chứa nội dung bạn nhập.");
                 }
             }
-
-            // Kiểm tra xem có tin nhắn nào được tìm thấy hay không
-            if (!found)
+            else
             {
-                MessageBox.Show("Không tìm thấy tin nhắn nào chứa nội dung bạn nhập.");
+                MessageBox.Show(language == "EN" ? "Please type the message you want to find" : "Vui lòng nhập tin nhắn bạn muốn tìm");
             }
         }
 
         private void pictureBox16_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void picWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    
+
+        private void btnNight_Click(object sender, EventArgs e)
+        {
+            btnNight.Visible=false;
+            btnLight.Visible = true;
+            appTheme = "light";
+            SaveConfig(language, appTheme);
+            LoadThemeAndLanguage();
+        }
+
+        private void btnLight_Click(object sender, EventArgs e)
+        {
+            btnNight.Visible = true;
+            btnLight.Visible = false;
+            appTheme = "dark";
+            SaveConfig(language, appTheme);
+            LoadThemeAndLanguage();
+
+        }
+
+        private void btnEN_Click(object sender, EventArgs e)
+        {
+            btnEN.Visible = false;
+            btnVN.Visible = true;
+            language = "VN";
+            SaveConfig(language, appTheme);
+            LoadThemeAndLanguage();
+        }
+
+        private void btnVN_Click(object sender, EventArgs e)
+        {
+            btnVN.Visible = false;
+            btnEN.Visible=true;
+            language = "EN";
+            SaveConfig(language, appTheme);
+            LoadThemeAndLanguage();
+        }
+
+        private void pictureBox18_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            FormLogin formLogin = new FormLogin();
+            formLogin.Show();
+
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            ResetMessageColors();
+        }
+
+        private void pictureBox17_Click(object sender, EventArgs e)
+        {
+            if (rUsername != "")
+            {
+                List<string> list = LoadMediaFiles(userLoggedIn, rUsername);
+                FormViewFille form = new FormViewFille(list);
+
+
+
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(language == "EN" ? "Please choose user to display file" : "Vui lòng chọn người dùng để hiển thị các thư mục");
+            }
+           
         }
     }
 }

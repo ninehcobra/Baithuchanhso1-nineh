@@ -29,46 +29,46 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblLoginWith = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblAlready = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblPass = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblDes = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.lblWelcome = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // label7
+            // lblLoginWith
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label7.Location = new System.Drawing.Point(45, 383);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 16);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Login with";
+            this.lblLoginWith.AutoSize = true;
+            this.lblLoginWith.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblLoginWith.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblLoginWith.Location = new System.Drawing.Point(45, 383);
+            this.lblLoginWith.Name = "lblLoginWith";
+            this.lblLoginWith.Size = new System.Drawing.Size(65, 16);
+            this.lblLoginWith.TabIndex = 15;
+            this.lblLoginWith.Text = "Login with";
             // 
             // button1
             // 
@@ -83,16 +83,16 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label6
+            // lblAlready
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(42, 345);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(132, 13);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Already have an account?";
+            this.lblAlready.AutoSize = true;
+            this.lblAlready.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblAlready.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblAlready.Location = new System.Drawing.Point(42, 345);
+            this.lblAlready.Name = "lblAlready";
+            this.lblAlready.Size = new System.Drawing.Size(132, 13);
+            this.lblAlready.TabIndex = 13;
+            this.lblAlready.Text = "Already have an account?";
             // 
             // btnRegister
             // 
@@ -118,15 +118,15 @@
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
             // 
-            // label5
+            // lblPass
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label5.Location = new System.Drawing.Point(40, 215);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Password";
+            this.lblPass.AutoSize = true;
+            this.lblPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblPass.Location = new System.Drawing.Point(40, 215);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(67, 16);
+            this.lblPass.TabIndex = 10;
+            this.lblPass.Text = "Password";
             // 
             // txtEmail
             // 
@@ -148,16 +148,16 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Email";
             // 
-            // label2
+            // lblDes
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(40, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Log in here";
+            this.lblDes.AutoSize = true;
+            this.lblDes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblDes.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblDes.Location = new System.Drawing.Point(40, 92);
+            this.lblDes.Name = "lblDes";
+            this.lblDes.Size = new System.Drawing.Size(73, 16);
+            this.lblDes.TabIndex = 5;
+            this.lblDes.Text = "Log in here";
             // 
             // panel2
             // 
@@ -166,17 +166,17 @@
             this.panel2.Controls.Add(this.pictureBox6);
             this.panel2.Controls.Add(this.pictureBox5);
             this.panel2.Controls.Add(this.pictureBox4);
-            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.lblLoginWith);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.lblAlready);
             this.panel2.Controls.Add(this.btnRegister);
             this.panel2.Controls.Add(this.txtPassword);
-            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.lblPass);
             this.panel2.Controls.Add(this.txtEmail);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.lblDes);
             this.panel2.Controls.Add(this.pictureBox3);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lblWelcome);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(342, 0);
             this.panel2.Name = "panel2";
@@ -195,28 +195,6 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "Forgot pasword?";
             this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(40, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 29);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Welcome to Nineh!";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(316, 464);
-            this.panel1.TabIndex = 6;
             // 
             // pictureBox6
             // 
@@ -259,9 +237,31 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblWelcome.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblWelcome.Location = new System.Drawing.Point(40, 62);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(234, 29);
+            this.lblWelcome.TabIndex = 4;
+            this.lblWelcome.Text = "Welcome to Nineh!";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(346, 464);
+            this.panel1.TabIndex = 6;
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Baithuchanhso1.Properties.Resources.logo;
+            this.pictureBox1.Image = global::Baithuchanhso1.Properties.Resources.chat;
             this.pictureBox1.Location = new System.Drawing.Point(116, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
@@ -298,11 +298,11 @@
             this.Text = "LoginForm";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -315,19 +315,19 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblLoginWith;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblAlready;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblDes;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;

@@ -15,14 +15,17 @@ namespace Baithuchanhso1
     public partial class FormRegister : Form
     {
 
-        private string nameText = "Enter yourname here";
+        private string nameText = "Enter your name here";
         private string emailText = "example@gmail.com";
         private string passwordText = "8+ characters";
+        string language;
+        string appTheme;
         public FormRegister()
         {
             InitializeComponent();
             CreateRegisterButton();
-
+            (language, appTheme) = LoadConfig();
+            LoadLanguageAndTheme();
             txtName.Text = nameText;
             txtName.ForeColor = SystemColors.GrayText;
             txtPassword.Text = passwordText;
@@ -32,7 +35,63 @@ namespace Baithuchanhso1
 
         }
 
-      void CreateRegisterButton()
+        public void LoadLanguageAndTheme()
+        {
+            nameText = language == "EN" ? "Enter your name here" : "Nhập tên của bạn ở đây";
+            label1.Text = language == "EN" ? "Welcome to AppChat" : "Chào mừng đến AppChat";
+            label2.Text = language == "EN" ? "Register your account" : "Đăng ký tài khoản của bạn";
+            label3.Text = language == "EN" ? "Name" : "Tên";
+            label5.Text = language == "EN" ? "Password" : "Mật khẩu";
+            label8.Text = language == "EN" ? "Image" : "Ảnh";
+            button2.Text = language == "EN" ? "Choose image" : "Chọn ảnh";
+            btnRegister.Text = language == "EN" ? "Register" : "Đăng ký";
+            label6.Text = language == "EN" ? "Already have an account?" : "Đã có tài khoản?";
+            label7.Text = language == "EN" ? "Register with" : "Đăng ký với";
+            button1.Text = language == "EN" ? "Login" : "Đăng nhập";
+            panel2.BackColor = appTheme == "light" ? SystemColors.Window : System.Drawing.ColorTranslator.FromHtml("#212121");
+            panel1.BackColor = appTheme == "light" ? SystemColors.MenuBar : System.Drawing.ColorTranslator.FromHtml("#171717");
+            btnRegister.BackColor = appTheme == "light" ? System.Drawing.ColorTranslator.FromHtml("#7B68EE") : System.Drawing.ColorTranslator.FromHtml("#841097");
+            label1.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label3.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label4.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label5.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            label8.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+        }
+        public static (string, string) LoadConfig()
+        {
+            const string FilePath = "config.txt";
+            // Kiểm tra xem file tồn tại không
+            if (File.Exists(FilePath))
+            {
+                // Đọc dữ liệu từ file
+                string data = File.ReadAllText(FilePath);
+
+                // Tách dữ liệu thành language và theme
+                string[] parts = data.Split(',');
+                if (parts.Length == 2)
+                {
+                    return (parts[0], parts[1]);
+                }
+            }
+
+            SaveConfig("EN", "light");
+            return ("EN", "light");
+
+
+            // Trả về giá trị mặc định nếu file không tồn tại hoặc dữ liệu không hợp lệ
+
+        }
+        public static void SaveConfig(string language, string theme)
+        {
+            const string FilePath = "config.txt";
+            // Tạo nội dung cần ghi vào file
+            string data = $"{language},{theme}";
+
+            // Ghi dữ liệu vào file
+            File.WriteAllText(FilePath, data);
+        }
+
+        void CreateRegisterButton()
         {
             btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.FlatAppearance.BorderSize = 0;

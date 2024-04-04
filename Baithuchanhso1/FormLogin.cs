@@ -15,14 +15,69 @@ namespace Baithuchanhso1
 {
     public partial class FormLogin : Form
     {
+        string language;
+        string appTheme;
         public FormLogin()
         {
             InitializeComponent();
-
+            (language,appTheme)=LoadConfig();
+            LoadLanguageAndTheme();
             txtPassword.Text = passwordText;
             txtPassword.ForeColor = SystemColors.GrayText;
             txtEmail.Text = emailText;
             txtEmail.ForeColor = SystemColors.GrayText;
+        }
+
+        public void LoadLanguageAndTheme ()
+        {
+            lblWelcome.Text = language == "EN" ? "Welcome to AppChat" : "Chào mừng đến AppChat";
+            lblWelcome.ForeColor = appTheme == "light" ? SystemColors.ActiveCaptionText : Color.White;
+            lblPass.Text = language == "EN" ? "Password" : "Mật khẩu";
+            lblPass.ForeColor=appTheme=="light"?SystemColors.ControlText:Color.White;
+            label4.ForeColor = appTheme == "light" ? SystemColors.ControlText : Color.White;
+            lblDes.Text = language == "EN" ? "Log in here" : "Đăng nhập tại đây";
+            lblLoginWith.Text = language == "EN" ? "Login with" : "Đăng nhập";
+            lblAlready.Text = language == "EN" ? "Not have account?" : "Chưa có tài khoản?";
+            label3.Text = language == "EN" ? "Forgot password?" : "Quên mật khẩu?";
+            btnRegister.Text = language == "EN" ? "Login" : "Đăng nhập";
+            button1.Text = language == "EN" ? "Register" : "Đăng ký";
+            panel2.BackColor=appTheme=="light"?SystemColors.Window: System.Drawing.ColorTranslator.FromHtml("#212121");
+            panel1.BackColor= appTheme=="light"?SystemColors.MenuBar: System.Drawing.ColorTranslator.FromHtml("#171717");
+            btnRegister.BackColor = appTheme == "light" ? System.Drawing.ColorTranslator.FromHtml("#7B68EE") : System.Drawing.ColorTranslator.FromHtml("#841097");
+        }
+
+        public static (string, string) LoadConfig()
+        {
+            const string FilePath = "config.txt";
+            // Kiểm tra xem file tồn tại không
+            if (File.Exists(FilePath))
+            {
+                // Đọc dữ liệu từ file
+                string data = File.ReadAllText(FilePath);
+
+                // Tách dữ liệu thành language và theme
+                string[] parts = data.Split(',');
+                if (parts.Length == 2)
+                {
+                    return (parts[0], parts[1]);
+                }
+            }
+
+            SaveConfig("EN", "light");
+            return ("EN", "light");
+
+
+            // Trả về giá trị mặc định nếu file không tồn tại hoặc dữ liệu không hợp lệ
+
+        }
+        public static void SaveConfig(string language, string theme)
+        {
+            const string FilePath = "config.txt";
+            // Tạo nội dung cần ghi vào file
+            string data = $"{language},{theme}";
+
+            // Ghi dữ liệu vào file
+            File.WriteAllText(FilePath, data);
         }
 
         private string emailText = "example@gmail.com";
@@ -88,7 +143,7 @@ namespace Baithuchanhso1
 
             if (IsValidUser(username, password))
             {
-                MessageBox.Show("Đăng nhập thành công!");
+                MessageBox.Show(language=="EN"?"Login success!": "Đăng nhập thành công!");
                 this.Hide();
                 ChatForm form= new ChatForm(username);
                 form.Show();
@@ -96,7 +151,7 @@ namespace Baithuchanhso1
             }
             else
             {
-                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!");
+                MessageBox.Show(language == "EN" ? "Password or username not correct!":"Tên đăng nhập hoặc mật khẩu không chính xác!");
             }
 
         }
@@ -127,13 +182,13 @@ namespace Baithuchanhso1
                 // Email tồn tại trong tệp users.txt
                 SendNewPasswordEmail(txtEmail.Text, newPassword);
 
-                MessageBox.Show("Mật khẩu mới đã được gửi đến địa chỉ email của bạn!", "Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(language == "EN" ? "New password was sent to your email!":"Mật khẩu mới đã được gửi đến địa chỉ email của bạn!", "Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Tiếp tục xử lý gửi email mật khẩu mới ở đây
             }
             else
             {
                 // Email không tồn tại trong tệp users.txt
-                MessageBox.Show("Địa chỉ email không tồn tại trong hệ thống!");
+                MessageBox.Show(language == "EN" ? "This email isn't exits!":"Địa chỉ email không tồn tại trong hệ thống!");
             }
             // Gửi email chứa mật khẩu mới
            
@@ -188,7 +243,7 @@ namespace Baithuchanhso1
                         try
                         {
                             smtpClient.Send(mail);
-                            MessageBox.Show("Email mật khẩu mới đã được gửi thành công!", "Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       
                         }
                         catch (SmtpException ex)
                         {

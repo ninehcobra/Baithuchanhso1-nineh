@@ -39,6 +39,10 @@ namespace Baithuchanhso1
                 AdjustTextBoxHeight();
             }
         }
+        public void ChangeLabelColor(Color color)
+        {
+            txtMessage.ForeColor = color;
+        }
 
         private string _avatarPath;
         public string AvatarPath

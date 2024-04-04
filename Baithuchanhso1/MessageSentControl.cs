@@ -88,5 +88,10 @@ namespace Baithuchanhso1
             SizeF textSize = TextRenderer.MeasureText(_message, txtMessage.Font);
             txtMessage.Width = Math.Min(((int)Math.Ceiling(textSize.Width) + 20), maxWidth);
         }
+
+        public void ChangeLabelColor(Color color)
+        {
+            txtMessage.ForeColor = color;
+        }
     }
 }
