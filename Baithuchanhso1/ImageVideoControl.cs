@@ -32,9 +32,15 @@ namespace Baithuchanhso1
                 // Hiển thị ảnh
                 pictureBox.ImageLocation = _filePath;
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox.Size = new Size(245, 245); // Set kích thước cố định là 245x245
+                pictureBox.Size = new Size(245, 245);
+                // Set kích thước cố định là 245x245
+                if (_filePath.StartsWith(@"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion"))
+                {
+                    pictureBox.Size = new Size(45, 45);
+                }
                 pictureBox.Visible = true;
                 axWindowsMediaPlayer1.Visible = false;
+                this.Height= pictureBox.Height+5;
             }
             else if (extension == ".mp4" || extension == ".avi" || extension == ".mov")
             {

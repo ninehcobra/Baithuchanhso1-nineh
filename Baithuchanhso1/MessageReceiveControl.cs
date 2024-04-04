@@ -68,7 +68,18 @@ namespace Baithuchanhso1
             }
         }
 
-        
+        public void HighlightText(int startIndex, int length, Color color)
+        {
+            if (txtMessage.InvokeRequired)
+            {
+                txtMessage.Invoke(new MethodInvoker(() => HighlightText(startIndex, length, color)));
+            }
+            else
+            {
+                txtMessage.Select(startIndex, length);
+                txtMessage.ForeColor = color;
+            }
+        }
 
         private string InsertLineBreaks(string input)
         {

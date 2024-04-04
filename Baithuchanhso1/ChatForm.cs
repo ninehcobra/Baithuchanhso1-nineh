@@ -481,11 +481,34 @@ namespace Baithuchanhso1
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
-            string emotion = "🙂"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo.png";
+            SaveEmotionMessage(emotionPath);
+
 
             // Lưu tin nhắn vào tập tin
-            
+
+        }
+        private void SaveEmotionMessage(string emotionFilePath)
+        {
+            // Lấy tin nhắn từ TextBox
+
+            // Kiểm tra xem tin nhắn có trống không
+            if (File.Exists(emotionFilePath))
+            {
+                // Tạo tên tập tin là "message.txt"
+                string filePath = "message.txt";
+
+                // Mở tập tin để ghi dữ liệu
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    // Ghi tin nhắn vào tập tin, cùng với đường dẫn đến tệp tin ảnh biểu tượng cảm xúc
+                    writer.WriteLine($"{DateTime.Now}||{userLoggedIn}||{lblChatName.Text}||{emotionFilePath}");
+                }
+
+                // Xóa nội dung của TextBox sau khi gửi tin nhắn thành công
+                txtChat.Text = "";
+            }
+            reloadMessage();
         }
 
         private void AddEmotion(string emotion)
@@ -568,8 +591,10 @@ namespace Baithuchanhso1
                         // Kiểm tra nếu người gửi và người nhận đúng và tin nhắn chứa đường dẫn video
                         if ((sender == currentUser && receiver == targetUser) || (sender == targetUser && receiver == currentUser))
                         {
-                            // Kiểm tra nếu tin nhắn là đường dẫn video
-                            if (IsVideo(message))
+                            if (message.StartsWith(@"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion"))
+                            { }    
+                                // Kiểm tra nếu tin nhắn là đường dẫn video
+                             else  if (IsVideo(message))
                             {
                                 mediaFiles.Add(message);
                             }
@@ -589,77 +614,77 @@ namespace Baithuchanhso1
 
         private void pictureBox8_Click(object sender, EventArgs e)
         {
-            string emotion = "😟"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo1.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-           
+
         }
 
         private void pictureBox10_Click(object sender, EventArgs e)
         {
-            string emotion = "😮"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo2.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
         }
 
         private void pictureBox9_Click(object sender, EventArgs e)
         {
-            string emotion = "😢"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo3.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
         }
 
         private void pictureBox14_Click(object sender, EventArgs e)
         {
-           
-            string emotion = "😋"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo4.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
         }
 
         private void pictureBox13_Click(object sender, EventArgs e)
         {
-           
-             string emotion = "😝"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo5.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
         }
 
         private void pictureBox12_Click(object sender, EventArgs e)
         {
-            string emotion = "😭"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo6.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
         }
 
         private void pictureBox11_Click(object sender, EventArgs e)
         {
-            string emotion = "😉"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo7.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
 
         }
 
         private void pictureBox15_Click(object sender, EventArgs e)
         {
-            string emotion = "😍"; // Đây là biểu tượng cảm xúc, bạn có thể thay đổi nó tùy ý
-            AddEmotion(emotion);
+            string emotionPath = @"C:\Users\ttbex\source\repos\Baithuchanhso1\Baithuchanhso1\bin\Debug\emotion\emo8.png";
+            SaveEmotionMessage(emotionPath);
 
             // Lưu tin nhắn vào tập tin
-          
+
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -875,7 +900,7 @@ namespace Baithuchanhso1
             // Biến để kiểm tra xem có tìm thấy tin nhắn nào không
             bool found = false;
 
-            if (searchText !="")
+            if (searchText != "")
             {
                 // Duyệt qua tất cả các tin nhắn để tìm kiếm
                 foreach (Control control in chatContent.Controls)
@@ -883,10 +908,11 @@ namespace Baithuchanhso1
                     if (control is MessageSentControl messageControl)
                     {
                         // Kiểm tra xem tin nhắn có chứa nội dung tìm kiếm không
-                        if (messageControl.Message.ToLower().Contains(searchText))
+                        int index = messageControl.Message.ToLower().IndexOf(searchText);
+                        if (index >= 0)
                         {
-                            // Tô đỏ tin nhắn
-                            messageControl.ChangeLabelColor(Color.Red);
+                            // Tô đỏ vùng chữ tìm được
+                            messageControl.HighlightText(index, searchText.Length, Color.Red);
 
                             // Di chuyển đến vị trí của tin nhắn tìm thấy
                             chatContent.ScrollControlIntoView(messageControl);
@@ -895,19 +921,15 @@ namespace Baithuchanhso1
                             found = true;
                             btnDone.Visible = true;
                         }
-                        else
-                        {
-                            // Nếu không tìm thấy, thì khôi phục màu nền gốc
-                            messageControl.BackColor = Color.Transparent;
-                        }
                     }
                     else if (control is MessageReceiveControl messageReceiveControl)
                     {
                         // Kiểm tra xem tin nhắn nhận có chứa nội dung tìm kiếm không
-                        if (messageReceiveControl.Message.ToLower().Contains(searchText))
+                        int index = messageReceiveControl.Message.ToLower().IndexOf(searchText);
+                        if (index >= 0)
                         {
-                            // Tô đỏ tin nhắn
-                            messageReceiveControl.ChangeLabelColor(Color.Red);
+                            // Tô đỏ vùng chữ tìm được
+                            messageReceiveControl.HighlightText(index, searchText.Length, Color.Red);
 
                             // Di chuyển đến vị trí của tin nhắn tìm thấy
                             chatContent.ScrollControlIntoView(messageReceiveControl);
@@ -915,11 +937,6 @@ namespace Baithuchanhso1
                             // Đánh dấu rằng đã tìm thấy ít nhất một tin nhắn
                             found = true;
                             btnDone.Visible = true;
-                        }
-                        else
-                        {
-                            // Nếu không tìm thấy, thì khôi phục màu nền gốc
-                            messageReceiveControl.BackColor = Color.Transparent;
                         }
                     }
                 }
