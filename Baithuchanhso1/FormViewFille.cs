@@ -78,9 +78,19 @@ namespace Baithuchanhso1
             }
         }
         private void OpenFullScreen(string path)
-        {
-            // Hiển thị ảnh hoặc video ở chế độ toàn màn hình
-            // Code để hiển thị ảnh/video ở chế độ toàn màn hình ở đây
+        { // Kiểm tra xem đường dẫn là cho ảnh hay video
+            if (IsImage(path))
+            {
+                // Nếu là ảnh, hiển thị ảnh ở chế độ toàn màn hình
+                FormFullScreenImage fullScreenImageForm = new FormFullScreenImage(path);
+                fullScreenImageForm.ShowDialog();
+            }
+            else if (IsVideo(path))
+            {
+                // Nếu là video, hiển thị video ở chế độ toàn màn hình
+                FormFullScreenVideo fullScreenVideoForm = new FormFullScreenVideo(path);
+                fullScreenVideoForm.ShowDialog();
+            }
         }
 
         private bool IsImage(string path)

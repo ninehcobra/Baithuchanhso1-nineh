@@ -128,31 +128,7 @@ namespace Baithuchanhso1
         }
         private void Form_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                // Xử lý khi người dùng nhấn phím Enter
-                e.Handled = true; // Ngăn chặn ký tự Enter được hiển thị trong TextBox
-
-                string message = txtChat.Text.Trim();
-
-                // Kiểm tra xem tin nhắn có trống không
-                if (!string.IsNullOrWhiteSpace(message) && message != PlaceholderText)
-                {
-                    // Tạo tên tập tin là "message.txt"
-                    string filePath = "message.txt";
-
-                    // Mở tập tin để ghi dữ liệu
-                    using (StreamWriter writer = new StreamWriter(filePath, true))
-                    {
-                        // Ghi tin nhắn vào tập tin, cùng với thông tin của người gửi và người nhận (ví dụ: thời gian gửi)
-                        writer.WriteLine($"{DateTime.Now}||{lblName.Text}||{lblChatName.Text}||{message}");
-                    }
-
-                    // Xóa nội dung của TextBox sau khi gửi tin nhắn thành công
-                    txtChat.Text = "";
-                }
-                reloadMessage();               // Thực hiện hành động tương ứng với việc nhấn Enter
-            }
+           
         }
 
         public class UserItem
@@ -944,7 +920,7 @@ namespace Baithuchanhso1
                 // Kiểm tra xem có tin nhắn nào được tìm thấy hay không
                 if (!found)
                 {
-                    MessageBox.Show("Không tìm thấy tin nhắn nào chứa nội dung bạn nhập.");
+                    MessageBox.Show(language == "EN" ? "Cannot find" : "Không tìm thấy tin nhắn nào chứa nội dung bạn nhập.");
                 }
             }
             else
@@ -1031,6 +1007,40 @@ namespace Baithuchanhso1
                 MessageBox.Show(language == "EN" ? "Please choose user to display file" : "Vui lòng chọn người dùng để hiển thị các thư mục");
             }
            
+        }
+
+        private void ChatForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if(rUsername=="")
+                {
+
+                }
+                else
+                {
+                    // Lấy tin nhắn từ TextBox
+                    string message = txtChat.Text.Trim();
+
+                    // Kiểm tra xem tin nhắn có trống không
+                    if (!string.IsNullOrWhiteSpace(message) && message != PlaceholderText)
+                    {
+                        // Tạo tên tập tin là "message.txt"
+                        string filePath = "message.txt";
+
+                        // Mở tập tin để ghi dữ liệu
+                        using (StreamWriter writer = new StreamWriter(filePath, true))
+                        {
+                            // Ghi tin nhắn vào tập tin, cùng với thông tin của người gửi và người nhận (ví dụ: thời gian gửi)
+                            writer.WriteLine($"{DateTime.Now}||{userLoggedIn}||{lblChatName.Text}||{message}");
+                        }
+
+                        // Xóa nội dung của TextBox sau khi gửi tin nhắn thành công
+                        txtChat.Text = "";
+                    }
+                    reloadMessage();
+                }
+            }
         }
     }
 }
